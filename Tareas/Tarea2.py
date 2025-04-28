@@ -29,6 +29,8 @@
 
 calificacion = int(input("Ingresa tu calificacion (0-100 separada por comas): "))
 
+listaNotas = []
+
 minimaAprobatoria = 70
 
 if calificacion >= 70:

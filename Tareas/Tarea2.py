@@ -27,13 +27,103 @@
 #   utilizando break y continue para controlar el flujo
 
 
-calificacion = int(input("Ingresa tu calificacion (0-100 separada por comas): "))
+# Presentado por: Diego Vallejo Z. 
+# Riwi - Clan Hopper
 
+# Creacion lista de notas
 listaNotas = []
 
-minimaAprobatoria = 70
+# creacion de lista de materias
+materias = [
+    "Fisica",
+    "Ética",
+    "Cálculo",
+    "Química"
+    ]
 
-if calificacion >= 70:
-    print("Aprobaste")
-else:
-    print("Reprobado")
+minimaAprobatoria = 70.0
+
+# Impresión de mensajes por pantalla
+print("=" * 53)
+
+print("||         SISTEMA DE CALIFICACIONES RIWI          ||")
+
+print("=" * 53)
+
+
+print(f"Ingresa tu calificacion (0-100 separada por comas).\n")
+
+calificaciones = input(f"Escibe tus calificaciones en el siguiente orden: \n{materias}\n")
+
+
+# Almacenamos los valores como elementos independientes en la lista
+calificacionesEnTexto = [nota.strip() for nota in calificaciones.split(',')]
+
+listaNotas = [round(float(nota),1) for nota in calificacionesEnTexto]
+
+print(f"Las calificaciones son: {listaNotas}")
+
+
+print('=' * 53)
+print('           REPORTE FINAL DE CALIFICACIONES           ')
+print('-' * 53)
+
+# Validamos si el estudiante aprobo o reprobo
+for i in range(0, len(materias)):
+    if listaNotas[i] >= minimaAprobatoria:
+        print(f"\t✅ Aprobaste {materias[i]} con: \t{listaNotas[i]}")
+    else:
+        print(f"\t⚠️  Reprobaste {materias[i]} con: \t{listaNotas[i]}")
+
+print('=' * 53)
+print('              PROMEDIO DE CALIFICACIONES              ')
+print('-' * 53)
+
+# Obtenemos el promedio de las notas con un for y lo mostramos por pantalla
+sumatoriaNotas = 0
+
+for i in range(0, len(listaNotas)):
+    sumatoriaNotas += listaNotas[i]
+
+promedioNotas = sumatoriaNotas / len(listaNotas)
+
+print(f"\t\tTu promedio de notas es: {round(promedioNotas, 2)}")
+
+print("=" * 53)
+print('            COMPARATIVO DE CALIFICACIONES            ')
+print('-' * 53)
+# Notas basadas en un valor especifico
+compararNotas = input("¿Deseas comparar tus notas con un valor específico? \n SI - NO\n")
+
+compararNotas = compararNotas.upper()
+
+match compararNotas:
+    case 'SI': 
+        valorNotaComparar = float(input("Ingresa la nota comparativa: "))
+
+        contador = 0
+        iterador = 0
+
+        # while para contar cuántas calificaciones son mayores que el valor especificado
+        while iterador != len(listaNotas):
+        #for i in range(0, len(listaNotas)):
+            if listaNotas[iterador] > valorNotaComparar:
+                contador += 1
+            iterador += 1
+        print(f"Tienes {contador} calificaciones mayores a {valorNotaComparar}")
+
+# ARREGLAR ESTA PARTE 
+        # for para verificar la presencia de una calificación específica y contar cuántas veces aparece
+        #valorNotaComparar = 0
+
+        for lista_nota in listaNotas:
+            if valorNotaComparar == lista_nota:
+                contadorRepecionNota += 1
+                print(f"La nota '{lista_nota}' aparece {contadorRepecionNota} veces. ")
+            else:
+                print(f"La nota {valorNotaComparar} aparce {valorNotaComparar} veces.")
+        
+    case 'NO':
+        print("Deseaste no comparar tus notas.")
+    case _:
+        print(f"Has seleccionado una opcion incorrecta. \nSolo se adminte SI o NO.")

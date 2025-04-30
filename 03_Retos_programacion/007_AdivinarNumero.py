@@ -1,26 +1,34 @@
 # 1. Adivina el número
-# El programa debe tener un número secreto (por ejemplo, 7). Pide al usuario que adivine el número hasta que lo acierte.
+# El programa debe tener un número secreto (por ejemplo, 7). 
+# Pide al usuario que adivine el número hasta que lo acierte.
 
-numeroSecreto = 23
+# Importamos libreria para numeros aleatorios
+import random as rd
 
+
+# Numero secreto que tienen que adivinar
+secretNumber = rd.randint(0, 999)
+
+# Bucle infito para solicitar un numero valido (no str)
 while True:
     
     try:
         
-        entrada = int(input("Ingresa un numero: "))
-        
-        break
+        entryNumber = int(input("Ingresa un numero: "))
+
+        if entryNumber > secretNumber:
+            print(f"El número a adivinar es menor. Intenta de nuevo.")            
+                    
+        elif entryNumber < secretNumber:
+            print(f"El número a adivinar es mayor. Intenta de nuevo.")
+
+        else:
+            print("Felicidades, has acertado.")
+            break
     
     except ValueError as e:
         print("Error: ", e)
         print("Intenta nuevamente. \n")
+ 
+   
 
-while entrada != numeroSecreto:
-    
-    if entrada > numeroSecreto:
-        print(f"El número secreto es mayor que {numeroSecreto}.")
-    elif entrada < numeroSecreto:
-        print(f"El número secreto es menor que {numeroSecreto}.")
-
-if entrada == numeroSecreto:
-    print("Felicidades, has acertado.")

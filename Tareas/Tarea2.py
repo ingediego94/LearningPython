@@ -80,9 +80,9 @@ if validacionLista == True:
         print('=' * 53)
         print('           REPORTE FINAL DE CALIFICACIONES           ')
         print('-' * 53)
-        print(f"Fecha:\t\t\t\t\t {formatoFecha}")
+        print(f"Fecha:{'\t'*5} {formatoFecha}")
 
-        print(f"Hora:\t\t\t\t\t {formatoHora}")
+        print(f"Hora:{'\t'*5} {formatoHora}")
         print('-' * 53)
 
         # Validamos si el estudiante aprobo o reprobo
@@ -114,18 +114,24 @@ if validacionLista == True:
 
         compararNotas = compararNotas.upper()
 
+    # Desea comparar notas?
         match compararNotas:
+            # SI desea comparar notas
             case 'SI': 
                 
                 while True:
                     try:
-                        valorNotaComparar = float(input("Ingresa la nota a comparar:  "))
-                        if 0 <= valorNotaComparar <= 100:
 
-                            break
+                        #VALIDAR ESTA PARTE
+                        valorNotaComparar = float(input("Ingresa la nota a comparar:  "))
+                        if not 0 <= valorNotaComparar <= 100:
+                            raise ValueError("El número está fuera del rango permitido.")
+                        break
                         
-                    except ValueError:
-                        print("\n⚠️  Error: No has ingresado un caracter válido o este \nse encuentra por fuera del rango permitido (0-100). \nIntenta nuevamente.\n")
+                    except ValueError as e:
+                        #print("\n⚠️  Error: No has ingresado un caracter válido o este se encuentra por fuera del rango permitido (0-100). \nIntenta nuevamente.\n")
+                        print("\n⚠️  Error:", e)
+                        print("Solo se permiten números entre 0 y 100. \nIntenta nuevamente.\n")
 
                 contador = 0
                 iterador = 0
@@ -137,14 +143,13 @@ if validacionLista == True:
                         contador += 1
                     iterador += 1
 
+                #VALIDAR---
                 if contador == 1:
                     print(f"Tienes {contador} calificacion igual a {valorNotaComparar}")
                 elif contador > 1:
                     print(f"Tienes {contador} calificaciones mayores a {valorNotaComparar}")
 
                 
-                
-        # ARREGLAR ESTA PARTE 
                 # for para verificar la presencia de una calificación específica y contar cuántas veces aparece
                 contadorRepeticionNota = 0
                 for lista_nota in listaNotas:
@@ -157,9 +162,16 @@ if validacionLista == True:
                     print(f"La nota {valorNotaComparar} aparece {contadorRepeticionNota} veces. ")
                 else:
                     print(f"La nota {valorNotaComparar} aparce {contadorRepeticionNota} veces.")
+
+                print(f"\n\t  {nombre.upper()}, GRACIAS POR PREFERIRNOS ")
+                print("=" * 53)
                 
+            
+            # NO desea comparar notas
             case 'NO':
                 print("Deseaste no comparar tus notas.")
+            
+            # Opcion INCORRECTA para comparar notas
             case _:
                 print(f"Has seleccionado una opcion incorrecta. \nSolo se adminte SI o NO.")
 

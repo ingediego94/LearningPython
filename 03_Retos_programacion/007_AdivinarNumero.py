@@ -29,6 +29,5 @@ while True:
     except ValueError as e:
         print("Error: ", e)
         print("Intenta nuevamente. \n")
- 
-   
+
 

@@ -83,6 +83,7 @@ if listValidation == True:
         print(f"Fecha:{'\t'*5} {dateFormated}")
 
         print(f"Hora:{'\t'*5} {hourFormated}")
+        print(f"Nombre del estudiante: \t\t\t{studentName}")
         print('-' * 53)
 
         # Validamos si el estudiante aprobo o reprobo
@@ -122,14 +123,14 @@ if listValidation == True:
                 while True:
                     try:
 
-                        #VALIDAR ESTA PARTE
+                        #Comparar notas
                         valueGradeToCompare = float(input("Ingresa la nota a comparar:  "))
                         if not 0 <= valueGradeToCompare <= 100:
                             raise ValueError("El número está fuera del rango permitido.")
                         break
                         
                     except ValueError as e:
-                        #print("\n⚠️  Error: No has ingresado un caracter válido o este se encuentra por fuera del rango permitido (0-100). \nIntenta nuevamente.\n")
+                        
                         print("\n⚠️  Error:", e)
                         print("Solo se permiten números entre 0 y 100. \nIntenta nuevamente.\n")
 
@@ -138,20 +139,17 @@ if listValidation == True:
 
                 # while para contar cuántas calificaciones son mayores que el valor especificado
                 while iterator != len(gradesList):
-                #for i in range(0, len(gradesList)):
+
                     if gradesList[iterator] > valueGradeToCompare:
                         counter += 1
                     iterator += 1
 
-                # Imprime por pantalla cuantas notas son iguales a la valueGradeToCompare 
+                # Imprime por pantalla cuantas notas son iguales a valueGradeToCompare 
                 
-                if counter == 1:
-                    print(f"Tienes {counter} calificacion igual a {valueGradeToCompare}")
+                if counter > 0:
+                    print(f"Tienes {counter} calificacion(es) mayor(es) a {valueGradeToCompare}")
                 elif counter == 0:
                     print(f"Tienes {counter} calificaciones mayores a {valueGradeToCompare}")
-                elif counter > 1:
-                    print(f"Tienes {counter} calificaciones mayores a {valueGradeToCompare}")
-
                 
                 # for para verificar la presencia de una calificación específica y contar cuántas veces aparece
                 gradesRepeatCounter = 0

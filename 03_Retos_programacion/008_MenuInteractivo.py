@@ -53,7 +53,7 @@ try:
         
     elif option == 2:
         print("El programa ha finalizado.")
-        break
+        #break
         
     else:
         print("Error.")

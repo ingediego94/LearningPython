@@ -28,10 +28,16 @@ subjects = [
 
 minimumGrade = 70.0
 
+RED = '\033[31m'
+GREEN = '\033[32m'
+RESET = '\033[0m' 
+BLUE = '\033[34m'
+YELLOW = '\033[33m'
+
 # Impresión de mensajes por pantalla
 print("=" * 53)
 
-print("||         SISTEMA DE CALIFICACIONES RIWI          ||")
+print(f"{BLUE}||         SISTEMA DE CALIFICACIONES RIWI          ||{RESET}")
 
 print("=" * 53)
 
@@ -89,12 +95,12 @@ if listValidation == True:
         # Validamos si el estudiante aprobo o reprobo
         for i in range(0, len(subjects)):
             if gradesList[i] >= minimumGrade:
-                print(f"\t✅ Aprobaste {subjects[i]} con: \t{gradesList[i]}")
+                print(f"\t✅ {GREEN}Aprobaste {subjects[i]} con: \t{gradesList[i]}{RESET}")
             else:
-                print(f"\t⛔ Reprobaste {subjects[i]} con: \t{gradesList[i]}")
+                print(f"\t⛔ {RED}Reprobaste {subjects[i]} con: \t{gradesList[i]}{RESET}")
 
         print('=' * 53)
-        print('              PROMEDIO DE CALIFICACIONES              ')
+        print(f'{BLUE}              PROMEDIO DE CALIFICACIONES              {RESET}')
         print('-' * 53)
 
         # Obtenemos el promedio de las notas con un for y lo mostramos por pantalla
@@ -108,7 +114,7 @@ if listValidation == True:
         print(f"\t\tTu promedio de notas es: {round(averageOfGrades, 1)}")
 
         print("=" * 53)
-        print('            COMPARATIVO DE CALIFICACIONES            ')
+        print(f'{BLUE}            COMPARATIVO DE CALIFICACIONES            {RESET}')
         print('-' * 53)
         # Notas basadas en un valor especifico
         compareGrades = input("¿Deseas comparar tus notas con un valor específico? \n SI - NO\n")
@@ -163,7 +169,7 @@ if listValidation == True:
                 else:
                     print(f"La nota {valueGradeToCompare} aparce {gradesRepeatCounter} veces.")
 
-                print(f"\n\t  {studentName.upper()}, GRACIAS POR PREFERIRNOS ")
+                print(f"\n\t{YELLOW}  {studentName.upper()}, GRACIAS POR PREFERIRNOS {RESET}")
                 print("=" * 53)
                 
             

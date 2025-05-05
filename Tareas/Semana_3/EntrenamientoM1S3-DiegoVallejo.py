@@ -20,7 +20,7 @@ def add_product(product_dict):
         'cantidad' : productsQuantity
     }
 
-    print(f"✅ {name} ha sido agregado exitosamente al sistema.")
+    print(f"✅ {name} ha sido agregado(a) exitosamente al sistema.")
 
 products = {}
 add_product(products)

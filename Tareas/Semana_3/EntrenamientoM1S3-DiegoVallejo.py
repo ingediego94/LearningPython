@@ -12,29 +12,7 @@ col2 = 'Cantidad'
 col3 = 'Precio'
 
 
-# def add_product():
-#     name = input("Ingresa el producto: ")
-
-#     try: 
-        
-#         price = float(input("Precio: "))
-#         productsQuantity = int(input("Cantidad: "))
-#     except ValueError:
-#         print("⚠️ El precio debe ser un numerico decimal y la cantidad un numero entero.")
-#         return
-
-#     product_dict[name] = {
-#         'precio' : price,
-#         'cantidad' : productsQuantity
-#     }
-
-#     print(f"✅ {name} ha sido agregado(a) exitosamente al sistema.")
-
-# products = {}
-# add_product(products)
-
-# print("\n diccionario actual del productos: ")
-# print(products)
+#     ⚠️  ✅ 
 
 # Function to add products
 
@@ -42,10 +20,6 @@ def add_product():
     name = input("Ingresa el nombre producto: ")
     price = float(input("Ingresa el precio del producto: "))
     quantity = int(input("Ingresa la cantidad de productos: "))
-
-    # names.append(nombre)
-    # prices.append(price)
-    # quantitys.append(quantity)
 
     product = {
         'nombre':name,
@@ -56,6 +30,18 @@ def add_product():
     products.append(product)
 
     print(f"Producto: {name} agregado con exito !")
+
+
+# Function to search a product
+def search_product(nombre):
+    founded = False
+    search = input("Nombre del producto a buscar: ")
+
+    for name in names:
+        if names["Producto"] == name:
+            print(f"Producto: {pro}")
+
+
 
 
 
@@ -73,6 +59,7 @@ def menu():
         option = int(input("Selecciona una opción del 1 al 6 "))
 
         if option == 1:
+            # agregar inputs por clean code
             add_product()
         elif option == 2:
             search_product()

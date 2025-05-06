@@ -45,9 +45,18 @@ lista3.append(200)
 print(lista3)
 print(lista4)
 
-# Eliminar un elemento 
+# Eliminar un elemento y guardarlo en otra variable 
 eliminado = lista3.pop(-1)
 print(eliminado)
+print(lista3)
+
+# Eliminar un solo elemento (funciona a base del indice)
+del lista3[0]
+print(lista3)
+
+# Elimina varios elementos a la vez. (Elimina desde la posicion 1 a la 5, porque cuenta
+# el ultimo numero -1)
+del lista3[1:6]
 print(lista3)
 
 # Vaciar por completo la lista

@@ -3,7 +3,13 @@
 # Riwi - Clan Hopper
 
 # Programa de gestión de inventarios
-
+names = []
+prices = []
+quantitys = []
+products = []
+col1 = 'Producto'
+col2 = 'Cantidad'
+col3 = 'Precio'
 
 
 # def add_product():
@@ -29,6 +35,28 @@
 
 # print("\n diccionario actual del productos: ")
 # print(products)
+
+# Function to add products
+
+def add_product():
+    name = input("Ingresa el nombre producto: ")
+    price = float(input("Ingresa el precio del producto: "))
+    quantity = int(input("Ingresa la cantidad de productos: "))
+
+    # names.append(nombre)
+    # prices.append(price)
+    # quantitys.append(quantity)
+
+    product = {
+        'nombre':name,
+        'precio':price,
+        'cantidad':quantity
+    }
+
+    products.append(product)
+
+    print(f"Producto: {name} agregado con exito !")
+
 
 
 # Function to show the menu

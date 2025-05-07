@@ -4,10 +4,20 @@
 
 # Programa de gestión de inventarios
 
+# We use datetime to get the date and the hour of utilization.
+from datetime import datetime
+
+dateAndTime = datetime.now()
+dateFormated = dateAndTime.strftime("Fecha: %Y-%m-%d                     Hora: %H:%M")
+
+
+# List to store all data has been inputted on the console
+
 products = []
 
 
 #     ⚠️   
+
 
 # Function to add products
 
@@ -45,14 +55,14 @@ def search_product(list_of_products):
 
     for product_searcher in list_of_products:
         if product_searcher['producto'] == search:
-            print(f"\n🔍 Producto: {product_searcher['producto']} | Precio: ${product_searcher ['precio']} | Cantidad: {product_searcher['cantidad']} unidades.")
+            print(f"\n🔍 Producto: {product_searcher['producto']} | Precio: ${product_searcher ['precio']} | Cantidad: {product_searcher['cantidad']} unidades | Subtotal: ${product_searcher['total']}.")
             founded = True
             break
     if not founded:
-        print("El producto no se encuentra registrado en la base de datos.")
+        print("⚠️  El producto no se encuentra registrado en la base de datos.")
 
 
-# Function to update pr
+# Function to update products
 def update_price(list_of_products):
     search = input("Nombre del producto a actualizar: \n").lower()
     
@@ -65,6 +75,7 @@ def update_price(list_of_products):
             #product_searcher['producto'] = update_product
             product_searcher['precio'] = update_price
             product_searcher['cantidad'] = update_quatity
+            product_searcher['total'] = product_searcher['precio'] * product_searcher['cantidad']
 
             print("\n✅ Actualización exitosa del producto.")
             break
@@ -73,24 +84,30 @@ def update_price(list_of_products):
 # Function to delete products
 def delete_product(list_of_products):
     
-    search = input("Busca por su nombre el producto que deseas eliminar:  ").lower()
+    search = input("Nombre del producto a eliminar:  ").lower()
 
     for product_searcher in list_of_products:
         if search == product_searcher['producto']:
-            del product_searcher['cantidad']
-            del product_searcher['precio']
-            del product_searcher['producto']
+            list_of_products.remove(product_searcher)
+
             break
-    # mejorar el eliminar los diccionarios vacios.
+
+    print("\n✅ El producto ha sido eliminado correctamente !")
     print(list_of_products)
 
 
 def calculate_total_stock_price(list_of_products):
     total = sum(product1['total'] for product1 in list_of_products)
-    print(f"El total de todo el inventario es: {total}")
+    print(f"El total de todo el inventario es: {total: .2f}")
 
 
-# Function to show the menu
+def detail_entire_db(list_of_products):
+    for i in list_of_products:
+        print(i)
+
+
+
+# Function to show the menu and to request the option
 def menu():
     while True:
         print(f"\n    MENU")
@@ -99,29 +116,36 @@ def menu():
         print("|3| Actualizar precio producto.")
         print("|4| Eliminar producto.")
         print("|5| Calcular el valor total de inventario.")
-        print("|6| Salir.\n")
+        print("|6| Ver toda la base de datos.")
+        print("|0| Salir.\n")
 
-        option = int(input("Selecciona una opción del 1 al 6: \n"))
+        
 
+        try:
+            option = int(input("Selecciona una opción del 1 al 6: \n"))
 
-        if option == 1:
-            # agregar inputs por clean code
-            add_product()
-        elif option == 2:
-            search_product(products)
-        elif option == 3:
-            update_price(products)
-        elif option == 4:
-            delete_product(products)
-        elif option == 5:
-            calculate_total_stock_price(products)
-        elif option == 6:
-            print("Gracias por utilizar nuestro sistema. \n¡Hasta luego!")
-            print('=' * 50)
-            break
-        else:
-            print('Opción no válida. "Intenta de nuevo.')
+            if option == 1:
+                add_product()
+            elif option == 2:
+                search_product(products)
+            elif option == 3:
+                update_price(products)
+            elif option == 4:
+                delete_product(products)
+            elif option == 5:
+                calculate_total_stock_price(products)
+            elif option == 6:
+                detail_entire_db(products)
+            elif option == 0:
+                print("\nGracias por utilizar nuestro sistema. \n¡Hasta luego!")
+                print(f"\n{dateFormated}")
+                print('=' * 50)
+                break
+            else:
+                print('Opción no válida. "Intenta de nuevo.')
 
+        except ValueError:
+            print("Ha ingresado una opcion inválida. Puedes intentar de nuevo.")
 
 
 

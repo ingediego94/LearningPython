@@ -93,11 +93,10 @@ def update_price(list_of_products):
     
         for product_searcher in list_of_products:
             if search == product_searcher['producto']:
-                #update_product = input("Actualiza el nombre del producto:    ").lower()
+
                 update_price = float(input("Actualiza su precio:    $"))
                 update_quatity = int(input("Actualiza su cantidad:  "))
 
-                #product_searcher['producto'] = update_product
                 product_searcher['precio'] = update_price
                 product_searcher['cantidad'] = update_quatity
                 product_searcher['total'] = product_searcher['precio'] * product_searcher['cantidad']
@@ -139,8 +138,9 @@ def calculate_total_stock_price(list_of_products):
 
     print(f"       🔢   TOTAL EN INVENTARIO DE PRODUCTOS")
 
-    #total = sum(map(lambda product: product['total'], list_of_products))   # Lambda function
-    total = sum(product1['total'] for product1 in list_of_products)
+    # Lambda function to get total price
+    total = sum(map(lambda product: product['total'], list_of_products))   
+
     print(f"\nEl total de todo el inventario es:  $ {total: .2f}")
 
 
@@ -156,8 +156,6 @@ def detail_entire_db(list_of_products):
     for i in list_of_products:
         print(f"{i['producto'].center(width)}  {str(i['precio']).center(width)}  {str(i['cantidad']).center(width)}  {str(i['total']).center(width)}")
     
-    for i in list_of_products:
-        print(*i.values())
 
 
 
@@ -193,7 +191,7 @@ def menu():
             elif option == 0:
                 print(f"\n             ❌ SALIDA")
                 print("\nGracias por utilizar nuestro sistema. \n           ¡Hasta luego!")
-                print(f"\nFecha y hora de salida \n{dateFormated}")
+                print(f"\nFecha y hora de ingreso al sistema \n{dateFormated}")
                 print('=' * 50)
                 break
             else:

@@ -17,6 +17,10 @@ dateAndTime = datetime.now()
 dateFormated = dateAndTime.strftime("Fecha: %Y-%m-%d                     Hora: %H:%M")
 
 
+# Tuple to create a validation through user and password
+credentials = ('Admin', 'admin123*')
+
+
 # List to store all data has been inputted on the console
 products = []
 
@@ -27,10 +31,6 @@ col2 = "PRECIO ($)"
 col3 = "CANTIDAD (un)"
 col4 = "TOTAL ($)"
 width = 20
-
-
-# Tuple to create a validation through user and password
-credentials = ('Admin', 'admin123*')
 
 
 

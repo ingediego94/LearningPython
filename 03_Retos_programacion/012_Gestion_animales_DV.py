@@ -40,8 +40,8 @@ def __agregar(name_x, age_x, sick_x, id_x):
 
 
 
-def __buscarPorCedula():
-    
+def __buscarPorNombre():
+
 
 
 # Funcion oara actualizar registro
@@ -64,6 +64,7 @@ def __listarAnimales(lista_de_animales):
 
 
 
+
 # Funcion para el menu general
 def menu ():
     
@@ -73,7 +74,8 @@ def menu ():
         print("| 1 | Agregar animal.")
         print("| 2 | Actualizar animal.")
         print("| 3 | Eliminar animal.")
-        print("| 4 | Listar todos los animales.")
+        print("| 4 | Buscar por nombre.")
+        print("| 5 | Listar todos los animales.")
         print("| 0 | Salir.")
 
         opcion = input("\nIngrese la opcion deseada del menú:\t")
@@ -97,7 +99,7 @@ def menu ():
                 case "3":
                     pass
                 case "4":
-                    __buscarPorCedula(baseDatos)
+                    __buscarPorNombre(baseDatos)
                 case "5":
                     __listarAnimales(baseDatos)
                 case "0":

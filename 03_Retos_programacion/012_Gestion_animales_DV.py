@@ -6,7 +6,8 @@ edad = []
 enfermo = []
 
 def validarEdad (num):
-    pass
+    if num <= 0:
+        print("Edad incorrecta")
 
 def agregar(name_x, age_x, sick_x):
     nombre.append(name_x)
@@ -14,11 +15,8 @@ def agregar(name_x, age_x, sick_x):
     enfermo.append(sick_x)
 
 
-    animales.append(nombre)
-    animales.append(edad)
-    animales.append(enfermo)
-
-print(animales)
+def listarAnimales(lista_de_animales):
+    print(animales)
 
 
 
@@ -41,9 +39,11 @@ def menu ():
             match opcion:
                 case "1":
                     print(f"\n--- AGREGAR ANIMALES ---")
-                    name = input("Escribe el nombre del animal:  ")
-                    age = int(input("Escribe la edad del animal:  "))
-                    sick = input("El animal está enfermo (Si/No):  ")
+                    name = input("Escribe el nombre del animal:  ").capitalize()
+                    age = int(input("Escribe la edad del animal:  ")) 
+                    (lambda x: print("Edad incorrecta") if x <= 0 else None)(age)
+                    sick = input("El animal está enfermo (Si/No):  ").capitalize()
+
                     agregar(name, age, sick)
                     
                 case "2":
@@ -51,9 +51,9 @@ def menu ():
                 case "3":
                     pass
                 case "4":
-                    pass
+                    listarAnimales(animales)
                 case "0":
-                    print("\nHas salido del programa, gracias por preferirnos.")
+                    pass
                 case _:
                     print("Error.")
                     break

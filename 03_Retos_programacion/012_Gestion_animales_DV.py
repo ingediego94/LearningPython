@@ -107,8 +107,11 @@ def __eliminarAnimales(lista_de_animales):
 
     for buscador in lista_de_animales:
         if buscador['nombre'] == buscarAnimal:
-            lista_de_animales.remove(buscador)
-        break
+            confirmacion = input(f"Confirma que desea borrar el registro de {buscarAnimal} ?  ").lower()
+            if confirmacion == 'si':
+                lista_de_animales.remove(buscador)
+                print(f"{buscarAnimal} se ha eliminado con exito.")
+            break
     else:
         print(f"{buscarAnimal} no se ha encontrado en la base de datos.")
 

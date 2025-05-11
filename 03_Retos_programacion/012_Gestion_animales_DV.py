@@ -23,7 +23,7 @@ col3 = "ENFERMO"
 col4 = "CEDULA"
 ancho = 20
 
-
+# ARREGLAR ESTA PARTE
 # Agregar animales a la BD
 def __agregar(name_x, age_x, sick_x, id_x):
 

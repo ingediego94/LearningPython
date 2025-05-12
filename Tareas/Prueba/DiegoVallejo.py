@@ -2,55 +2,12 @@
 # Made by: Diego Vallejo
 # RIWI - Clan Hopper a.m.
 
-"""
-1. Añadir productos al inventario AL MENOS 5
-2. Consultar productos en el inventario.
-    Buscar por su nombre y mostrar: nombre, precio y cantidades disponibles
-    Verificar si existe en el inventario o no
 
-4. Eliminar productos del inventario
-    Confirmar su existencia antes de borrarlo
-
-
-
-
-
-"""
-
-products = [
-    # {'name': 'pc gamer',
-    #  'price' : 700.59,
-    #  'quantity' : 8,
-    #  'total' : 5604.72
-    #  },
-    #  {'name' : 'mouse',
-    #   'price' : 40.31,
-    #   'quantity' : 10,
-    #   'total' : 403.1
-    #  },
-    #  {'name' : 'teclado mecánico',
-    #   'price' : 85.47,
-    #   'quantity' : 20,
-    #   'total' : 1709.4
-    #  },
-    #  {'name' : 'celular',
-    #   'price' : 199.4,
-    #   'quantity' : 9,
-    #   'total' : 1794.6
-    #  },
-    #  {'name' : 'hdmi premium',
-    #   'price' : 25.15,
-    #   'quantity' : 6,
-    #   'total' : 150.9
-    #  }
-]
-
+# List to store all
 products = []
-quantityOfProducts = len(products)
 
 
 
-# AGREGAR FUNCION DE LOS MINIMO 5 PRODUCTOS
 
 # 1. Function to add products
 def addProducts():
@@ -79,7 +36,6 @@ def addProducts():
                 products.append(product_dic)
 
                 print(f"✅ El producto '{productName}' con valor $ {productPrice} y con {productQuantity} unidades, se ha agregado exitosamente al inventario.")
-                print(products)
                 print('-' * 100)
                 break
             
@@ -96,10 +52,21 @@ def addProducts():
 def productsQuery(listOfProducts):
     print('\n -- 🔍  CONSULTAR PRODUCTOS --')
 
+    quantityOfProducts = len(products)
+
+    if quantityOfProducts == 0:
+        print("\nEl inventario de productos está vacío. No hay productos que consultar.")
+        print('-' * 100)
 
 
+    elif 0 < quantityOfProducts < 5:
+        print(f"\n Debe registrar al menos 5 productos para realizar esta operación.") 
+        print(f"Hay {quantityOfProducts} productos registrados.")
+        print('-' * 100)
 
-    if quantityOfProducts != 0:
+
+    elif quantityOfProducts >= 5:
+
         productToSearch = input('Escribe el nombre del producto deseas consultar:  ').lower().strip()
 
         for searcher in listOfProducts:
@@ -115,22 +82,27 @@ def productsQuery(listOfProducts):
             print(f"\nLo sentimos, el producto '{productToSearch}' no existe en el inventario.")
             print('-' * 100)
 
-    elif quantityOfProducts == 0:
-        print("\nEl inventario de productos está vacío. No hay productos que consultar.")
-        print(products)
-        print(len(products))
-        print('-' * 100)
+
 
 
 # 3. Function to update prices
 def updateProducts(listOfProducts):
     print("\n-- 🔄 ACTUALIZAR PRODUCTOS --")
+    
+    quantityOfProducts = len(products)
 
-    if quantityOfProducts == 0: 
-        print("No hay productos en el inventario que actualizar. La base de datos está vacía.")
+    if quantityOfProducts == 0:
+        print("\nNo hay productos en el inventario que actualizar. La base de datos está vacía.")
         print('-' * 100)
 
-    elif quantityOfProducts >= 1:
+
+    elif 0 < quantityOfProducts < 5:
+        print(f"\n Debe registrar al menos 5 productos para realizar esta operación.") 
+        print(f"Hay {quantityOfProducts} productos registrados.")
+        print('-' * 100)
+
+
+    elif quantityOfProducts >= 5:
 
         productToSearch = input("\nIngresa el nombre del producto a actualizar:  ").lower().strip()
 
@@ -160,11 +132,21 @@ def deleteProducts(listOfProducts):
     
     print("\n-- 🔥 BORRAR PRODUCTOS --")
 
+    quantityOfProducts = len(products)
+
     if quantityOfProducts == 0:
-        print("El inventario de productos está vacío, no hay productos por borrar.")
+        print("\nNo hay productos en el inventario que borrar. La base de datos está vacía.")
         print('-' * 100)
-    
-    elif quantityOfProducts >= 1:
+
+
+    elif 0 < quantityOfProducts < 5:
+        print(f"\n Debe registrar al menos 5 productos para realizar esta operación.") 
+        print(f"Hay {quantityOfProducts} productos registrados.")
+        print('-' * 100)
+
+
+    elif quantityOfProducts >= 5:
+
         productToSearch = input("Nombre del producto a eliminar:  ").lower().strip()
 
         for searcher in listOfProducts:
@@ -186,11 +168,20 @@ def calculateTotalAccumulatedValue(listOfProducts):
     
     print(f"-- 🔢 CALCULAR VALOR TOTAL ACUMULADO DEL INVENTARIO --")
 
+    quantityOfProducts = len(products)
+
     if quantityOfProducts == 0:
-        print('La base de datos está vacía, no hay productos en inventario para calcular su valor.')
+        print("\nLa base de datos está vacía, no hay productos en inventario para calcular su valor.")
         print('-' * 100)
 
-    elif quantityOfProducts >= 1:
+
+    elif 0 < quantityOfProducts < 5:
+        print(f"\n Debe registrar al menos 5 productos para realizar esta operación.") 
+        print(f"Hay {quantityOfProducts} productos registrados.")
+        print('-' * 100)
+
+
+    elif quantityOfProducts >= 5:
 
         #totalValue = sum(listOfProducts['total'])
         totalValue = sum([dictionary['total'] for dictionary in listOfProducts])

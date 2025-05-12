@@ -34,11 +34,38 @@ def __mostrarContactos(listaContactos):
 
 def __buscarPorNombre(namex, listaContactos):
 
-    for nombreContacto in listaContactos:
+    for nombreContacto, telefonox1 in listaContactos.items():
         if nombreContacto == namex:
-            print("Encontrado.")
+            print("Nombre       Teléfono")
+            print(f'{nombreContacto} : {telefonox1}')
+            break
+    else:
+        print('Contacto no encontrado en la agenda.')
 
 
+def __eliminarContacto(buscax, listaContactos):
+
+    for name in listaContactos:
+        if buscax == name:
+            listaContactos.pop(buscax)
+            print("Contacto eliminado con exito.")
+            break
+    else:
+        print("Contacto no encontrado en la agenda.")
+
+
+def __salir(z):
+    if z == 'si':
+        print("Saliendo del sistema.")
+        return True
+    
+    elif z == 'no':
+        print('Regresando al menu.')
+        return False
+    
+    else:
+        print("Opcion erronea.")
+        return False
 
 def __menu():
 
@@ -66,15 +93,18 @@ def __menu():
                 __mostrarContactos(contactos)
                 
             elif opcion == '3':
-                buscador = input('Nombre del contacto a buscar: ').capitalize()
+                buscador = input('Nombre del contacto a buscar: ').capitalize().strip()
                 __buscarPorNombre(buscador, contactos)
                 
             elif opcion == '4':
-                #__eliminarContacto()
-                pass
+                buscador = input('Nombre del contacto a buscar: ').capitalize().strip()
+                __eliminarContacto(buscador, contactos)
+                
             elif opcion == '0':
-                #__salir()
-                pass
+                salida = input("Desea salir del sistema?").lower().strip()
+                if __salir(salida):
+                    break
+                
             else:
                 print('Ha seleccionado una opcion incorrecta. Intenta de nuevo')
 

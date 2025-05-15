@@ -8,7 +8,6 @@ products = []
 
 
 
-
 # 1. Function to add products
 def addProducts():
 
@@ -51,31 +50,24 @@ def addProducts():
 # 2. Function to query a product
 def productsQuery(listOfProducts):
     print('\n -- 🔍  CONSULTAR PRODUCTOS --')
-
+    # global quantityOfProducts
     quantityOfProducts = len(products)
 
     if quantityOfProducts == 0:
         print("\nEl inventario de productos está vacío. No hay productos que consultar.")
         print('-' * 100)
 
-
-    elif 0 < quantityOfProducts < 5:
-        print(f"\n Debe registrar al menos 5 productos para realizar esta operación.") 
-        print(f"Hay {quantityOfProducts} productos registrados.")
-        print('-' * 100)
-
-
-    elif quantityOfProducts >= 5:
-
+    elif quantityOfProducts > 0:
         productToSearch = input('Escribe el nombre del producto deseas consultar:  ').lower().strip()
 
-        for searcher in listOfProducts:
-            if searcher['name'] == productToSearch:
+        for item in listOfProducts:
+            if item['name'] == productToSearch:
                 print("\nDetalles del producto buscado: \n")
-                print(f"Producto: {searcher['name']}")
-                print(f"Precio: $ {searcher['price']}")
-                print(f"Cantidad: {searcher['quantity']}")
-                print(f"Total invertido en este producto: $ {searcher['total']}")
+                print(f"Producto: {item['name']}")
+                print(f"Precio: $ {item['price']}")
+                print(f"Cantidad: {item['quantity']}")
+                print(f"Total invertido en este producto: $ {item['total']}")
+                print(f"\nLa base de datos tiene un total de {quantityOfProducts} productos registrados.")
                 print('-' * 100)
                 break
         else:
@@ -96,22 +88,16 @@ def updateProducts(listOfProducts):
         print('-' * 100)
 
 
-    elif 0 < quantityOfProducts < 5:
-        print(f"\n Debe registrar al menos 5 productos para realizar esta operación.") 
-        print(f"Hay {quantityOfProducts} productos registrados.")
-        print('-' * 100)
-
-
-    elif quantityOfProducts >= 5:
-
+    elif quantityOfProducts > 0:
+        print(f"\nLa base de datos tiene un total de {quantityOfProducts} producto(s) registrados.\n")
         productToSearch = input("\nIngresa el nombre del producto a actualizar:  ").lower().strip()
 
-        for searcher in listOfProducts:
-            if searcher['name'] == productToSearch:
+        for item in listOfProducts:
+            if item['name'] == productToSearch:
                 newPrice = float(input("Ingrese el nuevo precio del producto:  $ ").strip())
                 if newPrice > 0:
-                    searcher['price'] = newPrice
-                    searcher['total'] = searcher['price'] * searcher['quantity']
+                    item['price'] = newPrice
+                    item['total'] = item['price'] * item['quantity']
 
                     print(f"\n ✅ Actualización exitosa de {productToSearch}, su nuevo precio es $ {newPrice}")
                     print('-' * 100)
@@ -139,24 +125,25 @@ def deleteProducts(listOfProducts):
         print('-' * 100)
 
 
-    elif 0 < quantityOfProducts < 5:
-        print(f"\n Debe registrar al menos 5 productos para realizar esta operación.") 
-        print(f"Hay {quantityOfProducts} productos registrados.")
-        print('-' * 100)
-
-
-    elif quantityOfProducts >= 5:
-
+    elif quantityOfProducts > 0:
+        print(f"\nLa base de datos tiene un total de {quantityOfProducts} producto(s) registrados.\n")
         productToSearch = input("Nombre del producto a eliminar:  ").lower().strip()
 
-        for searcher in listOfProducts:
-            if searcher['name'] == productToSearch:
+        for item in listOfProducts:
+            if item['name'] == productToSearch:
                 print("\n   El producto fue encontrado en el inventario.")
-                print("\n   Procesando requerimiento ...")
-                listOfProducts.remove(searcher)
-                print(f"\n  ✅ El producto '{productToSearch}' se ha eliminado correctamente.")
-                print('-' * 100)
-                break
+                delete = input(f"Está seguro que desea eliminar {productToSearch} del inventario? Si / No").lower().strip()
+                if delete == 'si':
+                    print("\n   Procesando requerimiento ...")
+                    listOfProducts.remove(item)
+                    print(f"\n  ✅ El producto '{productToSearch}' se ha eliminado correctamente.")
+                    print('-' * 100)
+                    break
+                elif delete == 'no':
+                    print("Has decidido no eliminar el producto.")
+                    break
+                else:
+                    print("Opción inválida.")
         else:
             print(f"\n🚫  El producto '{productToSearch}' no se encuentra registrado en el inventario. \nIntente de nuevo.")
             print('-' * 100)    
@@ -175,18 +162,12 @@ def calculateTotalAccumulatedValue(listOfProducts):
         print('-' * 100)
 
 
-    elif 0 < quantityOfProducts < 5:
-        print(f"\n Debe registrar al menos 5 productos para realizar esta operación.") 
-        print(f"Hay {quantityOfProducts} productos registrados.")
-        print('-' * 100)
 
+    elif quantityOfProducts > 0:
 
-    elif quantityOfProducts >= 5:
-
-        #totalValue = sum(listOfProducts['total'])
         totalValue = sum([dictionary['total'] for dictionary in listOfProducts])
-
-        print(f"\n El valor total invertido en el inventario es de: $ {round(totalValue, 2)}")
+        print(f"\nLa base de datos tiene un total de {quantityOfProducts} producto(s) registrados.")
+        print(f"\nEl valor total invertido en el inventario es de: $ {round(totalValue, 2)}")
         print('-' * 100)
 
 
@@ -210,42 +191,42 @@ def menu():
         try:    
 
             # request the operation to do, according to the menu.
-           option = int(input('\nSelecciona la opción que deseas realizar (0 - 5):   ').strip())
-           print('-' * 100)
+            option = int(input('\nSelecciona la opción que deseas realizar (0 - 5):   ').strip())
+            print('-' * 100)
 
             # 1. Option to add products.
-           if option == 1:
+            if option == 1:
                 addProducts()
-               
+            
 
-           # 2. Option to products query.
-           elif option == 2:
+            # 2. Option to products query.
+            elif option == 2:
                 productsQuery(products)
 
-           
-           # 3. Option to update products.
-           elif option == 3:
+            
+            # 3. Option to update products.
+            elif option == 3:
                 updateProducts(products)
-               
-           
-           # 4. Option to delete products.
-           elif option == 4:
+            
+            
+            # 4. Option to delete products.
+            elif option == 4:
                 deleteProducts(products)
-               
-           
-           # 5. Option to calculate total inventory.
-           elif option == 5:
+                
+            
+            # 5. Option to calculate total inventory.
+            elif option == 5:
                 calculateTotalAccumulatedValue(products)
-               
-           
-           # 6. Option to exit.
-           elif option == 0:
+                
+            
+            # 6. Option to exit.
+            elif option == 0:
                 print(f"\n -- ❌ SALIDA --")
                 print("\n Gracias. Vuelve pronto. ")
                 print('=' * 100)
                 break
-           
-           else:
+            
+            else:
                 print(f"\nHa seleccionado '{option}', la cual no es una opcion válida. \nIntente nuevamente.")
         
         except ValueError:

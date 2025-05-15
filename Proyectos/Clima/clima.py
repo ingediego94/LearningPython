@@ -1,5 +1,5 @@
 import requests
-
+import json
 # Opcion de ciudades
 ciudades = [
     {
@@ -41,12 +41,15 @@ def climaCiudades (lat, lon):
     api_key = "069f2a1737dadc173328a5735661062f"
 
     url = f'https://api.openweathermap.org/data/2.5/weather?lat={lat}&lon={lon}&appid={api_key}'
+    #url = f'https://api.openweathermap.org/data/2.5/weather?q={ciudad}&appid={api_key}&units=metric&lang=es'
 
     respuesta = requests.get(url)
 
 
     # Convertimos a un .json
     datos_clima = respuesta.json()
+    datos_c = json.dumps(datos_clima)
+    print(datos_c)
 
     # Guardamos los datos específicos en variables:
     # Ubicacion

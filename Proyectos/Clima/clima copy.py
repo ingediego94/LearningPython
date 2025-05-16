@@ -1,8 +1,5 @@
 import requests
 import json
-import datetime
-import pytz
-
 # Opcion de ciudades
 ciudades = [
     {
@@ -37,56 +34,46 @@ ciudades = [
     }
 ]
 
-api_key = "069f2a1737dadc173328a5735661062f"
+
 
 
 # Funcion para extraer los datos
 def climaCiudades (lat, lon):
 
     
+    api_key = "069f2a1737dadc173328a5735661062f"
     url = f'https://api.openweathermap.org/data/2.5/weather?lat={lat}&lon={lon}&appid={api_key}'
     #url = f'https://api.openweathermap.org/data/2.5/weather?q={ciudad}&appid={api_key}&units=metric&lang=es'
 
     respuesta = requests.get(url)
+    print(respuesta)
 
 
     # Convertimos a un .json
-    datos_en_json = respuesta.json()
-    print(datos_en_json)
+    # datos_clima = respuesta.json()
+    datos_c = json.dumps(respuesta)
+    print(respuesta)
 
-    ImprimirDatos(datos_en_json)
 
-
-def ImprimirDatos(datosJSON):
+# def ImprimirDatos():
     # Guardamos los datos específicos en variables:
     # Ubicacion
-    pais = datosJSON['sys']['country']
-    ciudad = datosJSON['name']
+    pais = datos_c['sys']['country']
+    ciudad = datos_c['name']
+    nivel_mar = datos_c['main']['sea_level']
 
 
     # clima
 
-    clima = datosJSON['weather'][0]['description']
-    temperatura = round(datosJSON['main']['temp'] - 273.15, 1)    # Convertimos de Kelvin a Celsius
-    presion = datosJSON['main']['pressure']
-    humedad = datosJSON['main']['humidity']
+    # clima = datos_clima['weather'][0]['description']
+    # temperatura = round(datos_clima['main']['temp'] - 273.15, 1)    # Convertimos de Kelvin a Celsius
+    # presion = datos_clima['main']['pressure']
+    # humedad = datos_clima['main']['humidity']
 
 
 
-    viento = datosJSON['wind']['speed']
-    direccionViento = datosJSON['wind']['deg']
-
-    # Datos amanecer /atardecer
-    amanecerData = datosJSON['sys']['sunrise']
-    atardecerData = datosJSON['sys']['sunset']
-
-    # Conversion datos amanecer / atardecer
-    horaAmanecer = datetime.datetime.fromtimestamp(amanecerData)
-    horaAmanecerFormateada = horaAmanecer.strftime("%H:%M")
-
-    horaAtardecer = datetime.datetime.fromtimestamp(atardecerData)
-    horaAtardecerFormateada = horaAtardecer.strftime("%H:%M")
-
+    # viento = datos_clima['wind']['speed']
+    # direccionViento = datos_clima['wind']['deg']
 
 
     # Mostrar datos del clima por pantalla
@@ -95,17 +82,14 @@ def ImprimirDatos(datosJSON):
 
     print(f"PAÍS: {pais}.")
     print(f"UBICACIÓN: {ciudad}.")
-    print(f"Hora del amanecer: {horaAmanecerFormateada}")
-    print(f"Hora del atardecer: {horaAtardecerFormateada}\n")
+    print(f"Altura a nivel del mar: {nivel_mar} msnm.\n")
 
-    print(f"Clima : {clima}.")
-    print(f"Temperatura actual: {temperatura} °C.")
-    print(f"Presión atmosférica: {presion} hPa.")
-    print(f"Humedad: {humedad}%.")
-    print(f"Velocidad del viento: {viento} m/s.")
-    print(f"Dirección del viento: {direccionViento}°.")
-
-    print()
+    # print(f"Clima : {clima}.")
+    # print(f"Temperatura actual: {temperatura} °C.")
+    # print(f"Presión atmosférica: {presion}.")
+    # print(f"Humedad: {humedad} (revisar).")
+    # print(f"Velocidad del viento: {viento} Km/h.")
+    # print(f"Dirección del viento: {direccionViento}°.")
 
 
 # Funcion para la opcion 2 del menu.
@@ -125,17 +109,17 @@ def Opc_2(city):
 
 
 
-def Opc_3(city):
+# def Opc_3(city):
 
-    url = f'https://api.openweathermap.org/data/2.5/weather?q={city}&appid={api_key}&units=metric&lang=es'
+#     url = f'https://api.openweathermap.org/data/2.5/weather?q={city}&appid={api_key}&units=metric&lang=es'
 
-    respuesta = requests.get(url)
+#     respuesta = requests.get(url)
 
 
-    # Convertimos a un .json
-    datos_clima = respuesta.json()
-    datos_c = json.dumps(datos_clima)
-    print(datos_c)
+#     # Convertimos a un .json
+#     datos_clima = respuesta.json()
+#     datos_c = json.dumps(datos_clima)
+#     print(datos_c)
 
 
 # Funcion para el menu general
@@ -161,9 +145,9 @@ def Menu():
         city = input("\nEscriba la ciudad deseada:  ").lower().strip()
         Opc_2(city)
 
-    elif opcion == '3':
-        ciudad = input("Escribe tu ciudad.").lower().strip()
-        Opc_3(ciudad)
+    # elif opcion == '3':
+    #     ciudad = input("Escribe tu ciudad.").lower().strip()
+    #     Opc_3(ciudad)
 
     elif opcion == '0':
         print("\nHa decidido salir del sistema.")

@@ -43,7 +43,7 @@ api_key = "069f2a1737dadc173328a5735661062f"
 def climaCiudades (lat, lon):
 
     
-    url = f'https://api.openweathermap.org/data/2.5/weather?lat={lat}&lon={lon}&appid={api_key}'
+    url = f'https://api.openweathermap.org/data/2.5/weather?lat={lat}&lon={lon}&appid={api_key}&units=metric&lang=es'
     #url = f'https://api.openweathermap.org/data/2.5/weather?q={ciudad}&appid={api_key}&units=metric&lang=es'
 
     respuesta = requests.get(url)
@@ -51,7 +51,6 @@ def climaCiudades (lat, lon):
 
     # Convertimos a un .json
     datos_en_json = respuesta.json()
-    print(datos_en_json)
 
     ImprimirDatos(datos_en_json)
 
@@ -66,13 +65,8 @@ def ImprimirDatos(datosJSON):
     # clima
 
     clima = datosJSON['weather'][0]['description']
-    if datosJSON['main']['temp'] > 100:
-        temperatura = round(datosJSON['main']['temp'] - 273.15, 1)    # Convertimos de Kelvin a Celsius
-    else:
-        temperatura = round(datosJSON['main']['temp'], 1)
-    presion = datosJSON['main']['pressure']
+    temperatura = round(datosJSON['main']['temp'], 1)
     humedad = datosJSON['main']['humidity']
-
 
 
     viento = datosJSON['wind']['speed']
@@ -97,17 +91,15 @@ def ImprimirDatos(datosJSON):
 
     print(f"PAÍS: {pais}.")
     print(f"UBICACIÓN: {ciudad}.")
-    print(f"Hora del amanecer: {horaAmanecerFormateada}")
-    print(f"Hora del atardecer: {horaAtardecerFormateada}\n")
+    print(f"Hora del amanecer: {horaAmanecerFormateada}. (Hora Colombia)")
+    print(f"Hora del atardecer: {horaAtardecerFormateada}. (Hora Colombia)\n")
 
     print(f"Clima : {clima}.")
     print(f"Temperatura actual: {temperatura} °C.")
-    print(f"Presión atmosférica: {presion} hPa.")
     print(f"Humedad: {humedad}%.")
     print(f"Velocidad del viento: {viento} m/s.")
-    print(f"Dirección del viento: {direccionViento}°.")
+    print(f"Dirección del viento: {direccionViento}°.\n")
 
-    print()
 
 
 # Funcion para la opcion 2 del menu.
@@ -137,8 +129,6 @@ def Opc_3(city):
     # Convertimos a un .json
     datos_en_json = respuesta.json()
 
-    print(datos_en_json)
-
     ImprimirDatos(datos_en_json)
 
 
@@ -164,13 +154,30 @@ def Menu():
                 climaCiudades (lat, lon)
 
             elif opcion == '2':
-                print("\nSeleccione de las siguientes ciudades: ")
-                print("medellin, bogota, cali, londres, amsterdam, new york")
-                city = input("\nEscriba la ciudad deseada:  ").lower().strip()
-                Opc_2(city)
+                print("\nSelecciona de las siguientes ciudades: ")
+                print("1. Medellin.   2. Bogotá.   3. Cali.    4. Londres.   5. Amsterdam.   6. New York")
+                city = int(input("\nEscribe el número de ciudad deseada:  ").strip())
+                
+                city_op = ''
+
+                if city == 1:
+                    city_op = 'medellin'
+                elif city == 2:
+                    city_op = 'bogota'
+                elif city == 3:
+                    city_op = 'cali'
+                elif city == 4:
+                    city_op = 'londres'
+                elif city == 5:
+                    city_op = 'amsterdam'
+                elif city == 6:
+                    city_op = 'new york'
+                
+                
+                Opc_2(city_op)
 
             elif opcion == '3':
-                ciudad = input("Escribe tu ciudad.").lower().strip()
+                ciudad = input("Escribe tu ciudad:  ").lower().strip()
                 Opc_3(ciudad)
 
             elif opcion == '0':

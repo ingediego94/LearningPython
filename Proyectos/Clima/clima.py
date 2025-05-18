@@ -157,28 +157,34 @@ def Menu():
 
         opcion = input("\nSelecciona lo que deseas realizar:   ").lower().strip()
 
+        try:
+            if opcion == '1':
+                lat = float(input("\nIngrese la latitud: "))
+                lon = float(input("Ingrese la longitud: "))
+                climaCiudades (lat, lon)
 
-        if opcion == '1':
-            lat = float(input("\nIngrese la latitud: "))
-            lon = float(input("Ingrese la longitud: "))
-            climaCiudades (lat, lon)
+            elif opcion == '2':
+                print("\nSeleccione de las siguientes ciudades: ")
+                print("medellin, bogota, cali, londres, amsterdam, new york")
+                city = input("\nEscriba la ciudad deseada:  ").lower().strip()
+                Opc_2(city)
 
-        elif opcion == '2':
-            print("\nSeleccione de las siguientes ciudades: ")
-            print("medellin, bogota, cali, londres, amsterdam, new york")
-            city = input("\nEscriba la ciudad deseada:  ").lower().strip()
-            Opc_2(city)
+            elif opcion == '3':
+                ciudad = input("Escribe tu ciudad.").lower().strip()
+                Opc_3(ciudad)
 
-        elif opcion == '3':
-            ciudad = input("Escribe tu ciudad.").lower().strip()
-            Opc_3(ciudad)
-
-        elif opcion == '0':
-            print("\nHa decidido salir del sistema.")
+            elif opcion == '0':
+                print("\nHa decidido salir del sistema.")
+                break
 
 
-        else:
-            print("Opcion invalida.")
+            else:
+                print("Opcion invalida.")
+        
+        except ValueError:
+            print("Error, revisa tu opcion, solo se permiten numeros.")
+        except Exception:
+            print("Revisa tu elección.")
 
 Menu()
 

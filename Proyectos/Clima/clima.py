@@ -1,7 +1,6 @@
 import requests
-import json
 import datetime
-import pytz
+
 
 # Opcion de ciudades
 ciudades = [
@@ -67,7 +66,10 @@ def ImprimirDatos(datosJSON):
     # clima
 
     clima = datosJSON['weather'][0]['description']
-    temperatura = round(datosJSON['main']['temp'] - 273.15, 1)    # Convertimos de Kelvin a Celsius
+    if datosJSON['main']['temp'] > 100:
+        temperatura = round(datosJSON['main']['temp'] - 273.15, 1)    # Convertimos de Kelvin a Celsius
+    else:
+        temperatura = round(datosJSON['main']['temp'], 1)
     presion = datosJSON['main']['pressure']
     humedad = datosJSON['main']['humidity']
 
@@ -133,44 +135,50 @@ def Opc_3(city):
 
 
     # Convertimos a un .json
-    datos_clima = respuesta.json()
-    datos_c = json.dumps(datos_clima)
-    print(datos_c)
+    datos_en_json = respuesta.json()
+
+    print(datos_en_json)
+
+    ImprimirDatos(datos_en_json)
+
+
+
 
 
 # Funcion para el menu general
 def Menu():
 
-    print("-- MENU --")
-    print("| 1 | Ingresar coordenadas.") 
-    print("| 2 | Seleccionar del listado de ciudades.")
-    print("| 3 | Escribe tu ciudad.")
-    print("| 0 | Salir.")
+    while True:
+        print("-- MENU --")
+        print("| 1 | Ingresar coordenadas.") 
+        print("| 2 | Seleccionar del listado de ciudades.")
+        print("| 3 | Escribe tu ciudad. ")
+        print("| 0 | Salir.")
 
-    opcion = input("\nSelecciona lo que deseas realizar:   ").lower().strip()
-
-
-    if opcion == '1':
-        lat = float(input("\nIngrese la latitud: "))
-        lon = float(input("Ingrese la longitud: "))
-        climaCiudades (lat, lon)
-
-    elif opcion == '2':
-        print("\nSeleccione de las siguientes ciudades: ")
-        print("medellin, bogota, cali, londres, amsterdam, new york")
-        city = input("\nEscriba la ciudad deseada:  ").lower().strip()
-        Opc_2(city)
-
-    elif opcion == '3':
-        ciudad = input("Escribe tu ciudad.").lower().strip()
-        Opc_3(ciudad)
-
-    elif opcion == '0':
-        print("\nHa decidido salir del sistema.")
+        opcion = input("\nSelecciona lo que deseas realizar:   ").lower().strip()
 
 
-    else:
-        print("Opcion invalida.")
+        if opcion == '1':
+            lat = float(input("\nIngrese la latitud: "))
+            lon = float(input("Ingrese la longitud: "))
+            climaCiudades (lat, lon)
+
+        elif opcion == '2':
+            print("\nSeleccione de las siguientes ciudades: ")
+            print("medellin, bogota, cali, londres, amsterdam, new york")
+            city = input("\nEscriba la ciudad deseada:  ").lower().strip()
+            Opc_2(city)
+
+        elif opcion == '3':
+            ciudad = input("Escribe tu ciudad.").lower().strip()
+            Opc_3(ciudad)
+
+        elif opcion == '0':
+            print("\nHa decidido salir del sistema.")
+
+
+        else:
+            print("Opcion invalida.")
 
 Menu()
 
